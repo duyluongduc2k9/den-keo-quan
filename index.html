@@ -67,9 +67,9 @@
   function lin(hex){ return new THREE.Color(hex).convertSRGBToLinear(); }
 
   // ===== KÍCH THƯỚC CHÍNH (1 đơn vị = 10 cm) ===== (tính theo đơn vị "dm")
-  var R = 0.9;                       // Ø đế đỉnh–đỉnh 18 cm -> cạnh lục giác = bán kính = 9 cm (đối cạnh ≈ 15,6 cm)
+  var R = 0.8;                       // Ø đế đỉnh–đỉnh 18 cm -> cạnh lục giác = bán kính = 9 cm (đối cạnh ≈ 15,6 cm)
   var APO = R*Math.cos(Math.PI/6);
-  var W = 0.8, H = 2.4, T = 0.05, D = 0.045, LEG = 0.25;   // W: độ rộng giữa 2 chân; H: khung
+  var W = R, H = 2.4, T = 0.05, D = 0.045, LEG = 0.25;   // W: độ rộng giữa 2 chân; H: khung
   var HOLE_R = 0.75;                // bán kính lỗ nắp / vòm tròn (phải < APO = 0.823)
   var FAN_R = HOLE_R;                // quạt bằng vòm tròn
   var FAN_D = 2*FAN_R;               // đường kính quạt = 15,5 cm
