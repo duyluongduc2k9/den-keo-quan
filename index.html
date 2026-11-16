@@ -384,7 +384,7 @@
     ['Tính từ chân tới đỉnh', TOP], ['Khung', H], ['Khoảng cách 2 chân (mép trong)', W-2*T],
     ['Ø mặt đế (đỉnh)', 2*R], ['Ø mặt đế (cạnh)', 2*AOP], ['Ø quạt', FAN_D], ['Chân', LEG] 
   ];
-document.getElementById('lgBody').innerHTML =
+  document.getElementById('lgBody').innerHTML =
     items.map(function(it){ return '<b>' + it[0] + ':</b> ' + cm(it[1]); }).join('<br>');
 
   var target = new THREE.Vector3(0, 1.2, 0);
