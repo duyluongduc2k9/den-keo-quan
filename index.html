@@ -69,14 +69,15 @@
   // ===== KÍCH THƯỚC CHÍNH (1 đơn vị = 10 cm) =====
   var R = 0.9;                       // Ø đế đỉnh–đỉnh 16 cm -> cạnh lục giác = bán kính = 7 cm (đối cạnh ≈ 13,86 cm)
   var APO = R*Math.cos(Math.PI/6);
-  var W = R, H = 2.5, T = 0.05, D = 0.045, LEG = 0.3;   // W: độ rộng giữa 2 chân 7 cm; H: khung 24 cm
+  var W = R, H = 2.5, T = 0.05, D = 0.045, LEG = 0.3;   // W: độ rộng giữa 2 chân; H: khung 
+  //-------
   var HOLE_R = 0.775;                // bán kính lỗ nắp / vòm tròn (phải < APO = 0.823)
   var FAN_R = HOLE_R;                // quạt bằng vòm tròn
-  var FAN_D = 2*FAN_R;               // đường kính quạt = 15 cm
+  var FAN_D = 2*FAN_R;               // đường kính quạt
   var TOP = LEG + H;
   var EX = 0.9, LIFT = 1.3;
   function cm(u){ var v = u*UNIT_CM; return (Math.round(v*10)/10).toString().replace('.',',') + ' cm'; }
-
+// -----------
   var ambient = new THREE.AmbientLight(0xffffff, 0.55); scene.add(ambient);
   var hemi = new THREE.HemisphereLight(0x8196cc, 0x1a1218, 0); scene.add(hemi);
   var key = new THREE.DirectionalLight(0xffffff, 0.7); key.position.set(3,5,4); scene.add(key);
@@ -380,10 +381,10 @@
   updateDims(0);
 
   var items = [
-    ['Tính từ chân tới đỉnh', ], ['Khung', H], ['Khoảng cách 2 chân (mép trong)', 0,7],
-    ['Ø mặt đế (đỉnh)', 2*R], ['Ø mặt đế (cạnh)', 1,4], ['Ø quạt', 1,5], ['Chân', 0,25] 
+    ['Tính từ chân tới đỉnh', TOP], ['Khung', H], ['Khoảng cách 2 chân (mép trong)', W-2*T],
+    ['Ø mặt đế (đỉnh)', 2*R], ['Ø mặt đế (cạnh)', 2*AOP], ['Ø quạt', FAN_D], ['Chân', LEG] 
   ];
-  document.getElementById('lgBody').innerHTML =
+document.getElementById('lgBody').innerHTML =
     items.map(function(it){ return '<b>' + it[0] + ':</b> ' + cm(it[1]); }).join('<br>');
 
   var target = new THREE.Vector3(0, 1.2, 0);
