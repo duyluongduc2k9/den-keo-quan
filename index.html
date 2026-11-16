@@ -68,12 +68,12 @@
 
   // ===== KÍCH THƯỚC CHÍNH (1 đơn vị = 10 cm) =====
   // Số GHI TRÊN BẢN VẼ (hiển thị) - tách riêng khỏi kích thước vẽ thật để mô hình nhìn cân đối
-  var DISP = { baseD:1.6, baseAcross:1.386, legGap:0.7, fanD:1.5 };
+  var DISP = { baseD:1.4, baseAcross:1.386, legGap:0.7, fanD:1.5 };
   // Kích thước dùng để VẼ mô hình
   var R = 0.92;                      // bán kính đỉnh lục giác (vẽ)
   var APO = R*Math.cos(Math.PI/6);   // ≈ 0.797
   var W = R, H = 2.4, T = 0.05, D = 0.045, LEG = 0.25;
-  var HOLE_R = 0.745;                // lỗ nắp (phải < APO)
+  var HOLE_R = 0.61;                // lỗ nắp (phải < APO)
   var FAN_R = HOLE_R;                // quạt vừa khít lỗ
   var FAN_D = 2*FAN_R;
   var TOP = LEG + H;
