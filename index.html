@@ -65,14 +65,19 @@
   var camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 100);
 
   function lin(hex){ return new THREE.Color(hex).convertSRGBToLinear(); }
-    // ===== KÍCH THƯỚC CHÍNH (1 đơn vị = 10 cm) =====
+
+  // ===== KÍCH THƯỚC CHÍNH (1 đơn vị = 10 cm) =====
   var R = 0.8;                       // Bán kính đỉnh lục giác = 8 cm (đối cạnh ≈ 13,86 cm)
   var APO = R*Math.cos(Math.PI/6);   // Trung đoạn ≈ 0.693 (6,93 cm)
   var W = R, H = 2.4, T = 0.05, D = 0.045, LEG = 0.25;
-  var HOLE_R = 0.62;                 // Sửa từ 0.75 -> 0.62 (phải < APO ≈ 0.693)
+  var HOLE_R = 0.62;                 // Bán kính lỗ vòm tròn nhỏ hơn APO để không bị tràn viền
   var FAN_R = HOLE_R;                // Quạt vừa khít lỗ vòm tròn
-  var FAN_D = 2*FAN_R;               // Đường kính quạt = 12,4 cm
+  var FAN_D = 2*FAN_R;               // Đường kính quạt
+  var TOP = LEG + H;
+  var EX = 0.9, LIFT = 1.3;
+  function cm(u){ var v = u*UNIT_CM; return (Math.round(v*10)/10).toString().replace('.',',') + ' cm'; }
   //======
+
   var ambient = new THREE.AmbientLight(0xffffff, 0.55); scene.add(ambient);
   var hemi = new THREE.HemisphereLight(0x8196cc, 0x1a1218, 0); scene.add(hemi);
   var key = new THREE.DirectionalLight(0xffffff, 0.7); key.position.set(3,5,4); scene.add(key);
@@ -418,19 +423,19 @@
       p.x = e.clientX; p.y = e.clientY;
     } else if(ids.length===2){
       p.x = e.clientX; p.y = e.clientY;
-      var a = pointers[ids[0]], c2 = pointers[ids[1]];
-      var d = Math.hypot(a.x-c2.x, a.y-c2.y);
-      if(lastPinch>0){ targetRadius = clamp(targetRadius * (lastPinch/d), 2.5, MAXR); }
-      lastPinch = d;
-    }
-  });
-  function up(e){ delete pointers[e.pointerId]; lastPinch = 0; }
-  canvasEl.addEventListener('pointerup', up);
-  canvasEl.addEventListener('pointercancel', up);
-  canvasEl.addEventListener('wheel', function(e){
-    e.preventDefault();
-    targetRadius = clamp(targetRadius * Math.exp(e.deltaY*0.0012), 2.5, MAXR);
-  }, {passive:false});
+        var a = pointers[ids[0]], c2 = pointers[ids[1]];
+        var d = Math.hypot(a.x-c2.x, a.y-c2.y);
+        if(lastPinch>0){ targetRadius = clamp(targetRadius * (lastPinch/d), 2.5, MAXR); }
+        lastPinch = d;
+      }
+    });
+    function up(e){ delete pointers[e.pointerId]; lastPinch = 0; }
+    canvasEl.addEventListener('pointerup', up);
+    canvasEl.addEventListener('pointercancel', up);
+    canvasEl.addEventListener('wheel', function(e){
+      e.preventDefault();
+      targetRadius = clamp(targetRadius * Math.exp(e.deltaY*0.0012), 2.5, MAXR);
+    }, {passive:false});
 
   var dimsOn = true, fanOn = false, explode = 0, explodeTarget = 0;
   var legend = document.getElementById('legend');
@@ -510,6 +515,3 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 })();
-</script>
-</body>
-</html>
