@@ -64,7 +64,7 @@
 
   var camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 100);
 
-  function lin(hex){ return new THREE.Color(hex).  
+  function lin(hex){ return new THREE.Color(hex).convertSRGBToLinear(); }
     // ===== KÍCH THƯỚC CHÍNH (1 đơn vị = 10 cm) =====
   var R = 0.8;                       // Bán kính đỉnh lục giác = 8 cm (đối cạnh ≈ 13,86 cm)
   var APO = R*Math.cos(Math.PI/6);   // Trung đoạn ≈ 0.693 (6,93 cm)
